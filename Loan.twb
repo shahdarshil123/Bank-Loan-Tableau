@@ -18,6 +18,7 @@
     <SortTagCleanup />
     <WindowsPersistSimpleIdentifiers />
     <WorksheetBackgroundTransparency />
+    <ZoneBackgroundTransparency />
   </document-format-change-manifest>
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
@@ -617,20 +618,20 @@
       <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
       <style>
         <style-rule element='mark'>
-          <encoding attr='color' field='[Good vs Bad Loan]' type='palette'>
-            <map to='#bab0ac'>
-              <bucket>&quot;Bad Loan&quot;</bucket>
-            </map>
-            <map to='#f28e2b'>
-              <bucket>&quot;Good Loan&quot;</bucket>
-            </map>
-          </encoding>
           <encoding attr='color' field='[Good vs Bad Loan (copy)_1625236523014447110]' type='palette'>
             <map to='#bab0ac'>
               <bucket>&quot;Good Loan&quot;</bucket>
             </map>
             <map to='#e15759'>
               <bucket>&quot;Bad Loan&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[Good vs Bad Loan]' type='palette'>
+            <map to='#bab0ac'>
+              <bucket>&quot;Bad Loan&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Good Loan&quot;</bucket>
             </map>
           </encoding>
         </style-rule>
@@ -649,6 +650,30 @@
       </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
     </datasource>
   </datasources>
+  <shared-views>
+    <shared-view name='federated.024kxoa153sary17vtceu1myby4v'>
+      <datasources>
+        <datasource caption='FinancialLoan (bankLoanDB)' name='federated.024kxoa153sary17vtceu1myby4v' />
+      </datasources>
+      <datasource-dependencies datasource='federated.024kxoa153sary17vtceu1myby4v'>
+        <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
+        <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+        <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+        <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+        <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
+        <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
+      </datasource-dependencies>
+      <filter class='categorical' column='[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]'>
+        <groupfilter function='level-members' level='[none:grade:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+      </filter>
+      <filter class='categorical' column='[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]'>
+        <groupfilter function='level-members' level='[none:purpose:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+      </filter>
+      <filter class='categorical' column='[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]'>
+        <groupfilter function='level-members' level='[none:verification_status:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+      </filter>
+    </shared-view>
+  </shared-views>
   <worksheets>
     <worksheet name='Avg DTI'>
       <layout-options>
@@ -668,8 +693,19 @@
               <calculation class='tableau' formula='AVG([dti])' />
             </column>
             <column caption='Dti' datatype='real' name='[dti]' role='measure' type='quantitative' />
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Avg Interest Rate (copy)_1130403513767403520]' derivation='User' name='[usr:Avg Interest Rate (copy)_1130403513767403520:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -729,9 +765,20 @@
             <column caption='Avg Interest Rate' datatype='real' name='[Calculation_1643250921318232079]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='AVG([int_rate])' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Int Rate' datatype='real' name='[int_rate]' role='measure' type='quantitative' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1643250921318232079]' derivation='User' name='[usr:Calculation_1643250921318232079:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -802,10 +849,21 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Loan Amount' datatype='integer' name='[loan_amount]' role='measure' type='quantitative' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Good Loan Funded Amount (copy)_1625236523018772489]' derivation='User' name='[usr:Good Loan Funded Amount (copy)_1625236523018772489:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -874,10 +932,21 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column caption='Total Payment' datatype='integer' name='[total_payment]' role='measure' type='quantitative' />
             <column-instance column='[Good Loan Amount Received (copy)_1625236523019505674]' derivation='User' name='[usr:Good Loan Amount Received (copy)_1625236523019505674:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -948,10 +1017,21 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Good Loan Applications (copy)_1625236523017793544]' derivation='User' name='[usr:Good Loan Applications (copy)_1625236523017793544:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1015,10 +1095,21 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Good Loan% (copy)_1625236523015204871]' derivation='User' name='[usr:Good Loan% (copy)_1625236523015204871:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1092,11 +1183,22 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1625236523001094145]' derivation='User' name='[usr:Calculation_1625236523001094145:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1643250921306042368]' derivation='User' name='[usr:Calculation_1643250921306042368:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1209,10 +1311,21 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column caption='Total Payment' datatype='integer' name='[total_payment]' role='measure' type='quantitative' />
             <column-instance column='[Good Loan Funded Amount (copy)_1625236523009933317]' derivation='User' name='[usr:Good Loan Funded Amount (copy)_1625236523009933317:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1283,10 +1396,21 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Good Loan% (copy)_1625236523008765955]' derivation='User' name='[usr:Good Loan% (copy)_1625236523008765955:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1354,10 +1478,21 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Loan Amount' datatype='integer' name='[loan_amount]' role='measure' type='quantitative' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Good Loan Applications (copy)_1625236523009384452]' derivation='User' name='[usr:Good Loan Applications (copy)_1625236523009384452:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1424,10 +1559,21 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1625236523005628418]' derivation='User' name='[usr:Calculation_1625236523005628418:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1501,11 +1647,22 @@
                 </bin>
               </calculation>
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1625236523001094145]' derivation='User' name='[usr:Calculation_1625236523001094145:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1643250921306042368]' derivation='User' name='[usr:Calculation_1643250921306042368:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1536,6 +1693,13 @@
             <format attr='line-visibility' scope='cols' value='off' />
             <format attr='stroke-size' scope='rows' value='0' />
             <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]' value='Verification Status' />
+            <format attr='background-color' value='#000000' />
+          </style-rule>
+          <style-rule element='quick-filter-title'>
+            <format attr='color' value='#d3b348' />
           </style-rule>
         </style>
         <panes>
@@ -1626,12 +1790,17 @@
               <calculation class='tableau' formula='SUM([total_payment])' />
             </column>
             <column caption='Dti' datatype='real' name='[dti]' role='measure' type='quantitative' />
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Int Rate' datatype='real' name='[int_rate]' role='measure' type='quantitative' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
             <column caption='Loan Amount' datatype='integer' name='[loan_amount]' role='measure' type='quantitative' />
             <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
             <column-instance column='[loan_status]' derivation='None' name='[none:loan_status:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column caption='Total Payment' datatype='integer' name='[total_payment]' role='measure' type='quantitative' />
             <column-instance column='[Avg Interest Rate (copy)_1130403513767403520]' derivation='User' name='[usr:Avg Interest Rate (copy)_1130403513767403520:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1643250921306042368]' derivation='User' name='[usr:Calculation_1643250921306042368:qk]' pivot='key' type='quantitative' />
@@ -1640,6 +1809,7 @@
             <column-instance column='[MTD Loan Funded (copy)_1643250921316249612]' derivation='User' name='[usr:MTD Loan Funded (copy)_1643250921316249612:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Total Applications (copy)_1643250921312403463]' derivation='User' name='[usr:Total Applications (copy)_1643250921312403463:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Total Funded Amount (copy)_1643250921315541003]' derivation='User' name='[usr:Total Funded Amount (copy)_1643250921315541003:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.024kxoa153sary17vtceu1myby4v].[:Measure Names]'>
             <groupfilter function='union' user:op='manual'>
@@ -1668,6 +1838,9 @@
           </_.fcp.SingleValuePerNestSorting.true...single-value-per-nest-shelf-sorts>
           <slices>
             <column>[federated.024kxoa153sary17vtceu1myby4v].[:Measure Names]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -1745,9 +1918,20 @@
               <calculation class='tableau' formula='AVG( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=0&#13;&#10;THEN&#13;&#10;[dti]&#13;&#10;END&#13;&#10;)' />
             </column>
             <column caption='Dti' datatype='real' name='[dti]' role='measure' type='quantitative' />
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[MTD Avg Interest Rate (copy)_1130403513767968769]' derivation='User' name='[usr:MTD Avg Interest Rate (copy)_1130403513767968769:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1800,10 +1984,21 @@
             <column caption='MTD Avg Interest Rate' datatype='real' name='[MTD Loan Funded (copy)_1643250921319108625]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='AVG( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=0&#13;&#10;THEN&#13;&#10;[int_rate]&#13;&#10;END&#13;&#10;)' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Int Rate' datatype='real' name='[int_rate]' role='measure' type='quantitative' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[MTD Loan Funded (copy)_1643250921319108625]' derivation='User' name='[usr:MTD Loan Funded (copy)_1643250921319108625:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1856,10 +2051,21 @@
             <column caption='MTD Loan Amount Received' datatype='integer' name='[MTD Loan Funded (copy)_1643250921316249612]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='SUM( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=0&#13;&#10;THEN&#13;&#10;[total_payment]&#13;&#10;END&#13;&#10;)' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column caption='Total Payment' datatype='integer' name='[total_payment]' role='measure' type='quantitative' />
             <column-instance column='[MTD Loan Funded (copy)_1643250921316249612]' derivation='User' name='[usr:MTD Loan Funded (copy)_1643250921316249612:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1919,10 +2125,21 @@
             <column caption='MTD Loan Applications' datatype='integer' name='[Calculation_1643250921307738113]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='COUNT( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=0&#13;&#10;THEN&#13;&#10;[id]&#13;&#10;END&#13;&#10;)' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1643250921307738113]' derivation='User' name='[usr:Calculation_1643250921307738113:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1975,10 +2192,21 @@
             <column caption='MTD Loan Funded' datatype='integer' name='[MTD Loan Applications (copy)_1643250921313419272]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='SUM( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=0&#13;&#10;THEN&#13;&#10;[loan_amount]&#13;&#10;END&#13;&#10;)' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
             <column caption='Loan Amount' datatype='integer' name='[loan_amount]' role='measure' type='quantitative' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[MTD Loan Applications (copy)_1643250921313419272]' derivation='User' name='[usr:MTD Loan Applications (copy)_1643250921313419272:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2038,9 +2266,20 @@
               <calculation class='tableau' formula='AVG( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=1&#13;&#10;THEN&#13;&#10;[dti]&#13;&#10;END&#13;&#10;)' />
             </column>
             <column caption='Dti' datatype='real' name='[dti]' role='measure' type='quantitative' />
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[MoM Avg Interest (copy)_1130403513768636419]' derivation='User' name='[usr:MoM Avg Interest (copy)_1130403513768636419:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2099,10 +2338,21 @@
             <column caption='Previous Month Avg Interest Rate' datatype='real' name='[Previous Month Payment Received (copy)_1643250921327755282]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='AVG( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=1&#13;&#10;THEN&#13;&#10;[int_rate]&#13;&#10;END&#13;&#10;)' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Int Rate' datatype='real' name='[int_rate]' role='measure' type='quantitative' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[MoM Total Payment Received (copy)_1643250921327927315]' derivation='User' name='[usr:MoM Total Payment Received (copy)_1643250921327927315:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2161,10 +2411,21 @@
             <column caption='Previous Month Payment Received' datatype='integer' name='[Previous Month Loan Applications (copy)_1643250921317036045]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='SUM( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=1&#13;&#10;THEN&#13;&#10;[total_payment]&#13;&#10;END&#13;&#10;)' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column caption='Total Payment' datatype='integer' name='[total_payment]' role='measure' type='quantitative' />
             <column-instance column='[MoM Loan Funded (copy)_1643250921317228558]' derivation='User' name='[usr:MoM Loan Funded (copy)_1643250921317228558:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2223,10 +2484,21 @@
             <column caption='Previous Month Loan Applications' datatype='integer' name='[MTD Loan Applications (copy)_1643250921310720005]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='COUNT( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=1&#13;&#10;THEN&#13;&#10;[id]&#13;&#10;END&#13;&#10;)' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1643250921311367174]' derivation='User' name='[usr:Calculation_1643250921311367174:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2285,10 +2557,21 @@
             <column caption='Previous Month Loan Funded' datatype='integer' name='[Previous Month Loan Applications (copy)_1643250921314275338]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='SUM( IF DATEDIFF(&apos;month&apos;,[issue_date],{MAX([issue_date])})=1&#13;&#10;THEN&#13;&#10;[loan_amount]&#13;&#10;END&#13;&#10;)' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Issue Date' datatype='date' name='[issue_date]' role='dimension' type='ordinal' />
             <column caption='Loan Amount' datatype='integer' name='[loan_amount]' role='measure' type='quantitative' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[MoM Applications (copy)_1643250921314140169]' derivation='User' name='[usr:MoM Applications (copy)_1643250921314140169:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2349,9 +2632,20 @@
             <column caption='Total Amount Received' datatype='integer' name='[Total Funded Amount (copy)_1643250921315541003]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='SUM([total_payment])' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column caption='Total Payment' datatype='integer' name='[total_payment]' role='measure' type='quantitative' />
             <column-instance column='[Total Funded Amount (copy)_1643250921315541003]' derivation='User' name='[usr:Total Funded Amount (copy)_1643250921315541003:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2412,9 +2706,20 @@
             <column caption='Total Funded Amount' datatype='integer' name='[Total Applications (copy)_1643250921312403463]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='SUM([loan_amount])' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Loan Amount' datatype='integer' name='[loan_amount]' role='measure' type='quantitative' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Total Applications (copy)_1643250921312403463]' derivation='User' name='[usr:Total Applications (copy)_1643250921312403463:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2475,9 +2780,20 @@
             <column caption='Total Applications' datatype='integer' name='[Calculation_1643250921306042368]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='COUNT([id])' />
             </column>
+            <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
+            <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+            <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+            <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+            <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1643250921306042368]' derivation='User' name='[usr:Calculation_1643250921306042368:qk]' pivot='key' type='quantitative' />
+            <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</column>
+            <column>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -2526,6 +2842,17 @@
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Loan Summary Dashboard'>
       <style />
       <size maxheight='900' maxwidth='1600' minheight='900' minwidth='1600' preset-index='8' sizing-mode='fixed' />
+      <datasources>
+        <datasource caption='FinancialLoan (bankLoanDB)' name='federated.024kxoa153sary17vtceu1myby4v' />
+      </datasources>
+      <datasource-dependencies datasource='federated.024kxoa153sary17vtceu1myby4v'>
+        <column caption='Grade' datatype='string' name='[grade]' role='dimension' type='nominal' />
+        <column-instance column='[grade]' derivation='None' name='[none:grade:nk]' pivot='key' type='nominal' />
+        <column-instance column='[purpose]' derivation='None' name='[none:purpose:nk]' pivot='key' type='nominal' />
+        <column-instance column='[verification_status]' derivation='None' name='[none:verification_status:nk]' pivot='key' type='nominal' />
+        <column caption='Purpose' datatype='string' name='[purpose]' role='dimension' type='nominal' />
+        <column caption='Verification Status' datatype='string' name='[verification_status]' role='dimension' type='nominal' />
+      </datasource-dependencies>
       <zones>
         <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
           <zone h='98222' id='57' param='horz' type-v2='layout-flow' w='99000' x='500' y='889'>
@@ -2692,13 +3019,16 @@
           </zone>
         </zone>
         <zone h='28556' id='87' name='Loan Status' w='80875' x='16875' y='69000' />
+        <zone h='6333' id='92' mode='checkdropdown' name='Good Loans' param='[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]' type-v2='filter' values='database' w='10000' x='3563' y='66333' />
+        <zone h='5111' id='93' mode='checkdropdown' name='Good Loans' param='[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]' type-v2='filter' values='database' w='10000' x='3625' y='57889' />
+        <zone h='5778' id='94' mode='checkdropdown' name='Good Loans' param='[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]' type-v2='filter' values='database' w='10000' x='3500' y='49111' />
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='3850' minheight='3850' sizing-mode='vscroll' />
+          <size maxheight='4000' minheight='4000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='91' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98222' id='90' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
+            <zone h='100000' id='96' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98222' id='95' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
                 <zone fixed-size='280' h='98222' id='3' is-fixed='true' is-scaled='1' param='C:/Users/Darshil Shah/OneDrive - Northeastern University/Desktop/Loan data Tableau/Tableau Background 1.jpg' type-v2='bitmap' w='99000' x='500' y='889'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2969,6 +3299,33 @@
                   </zone-style>
                 </zone>
                 <zone fixed-size='280' h='2556' id='32' is-fixed='true' name='MoM Total Loan Funded' show-title='false' w='4563' x='42125' y='24333'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='6333' id='92' mode='checkdropdown' name='Good Loans' param='[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]' type-v2='filter' values='database' w='10000' x='3563' y='66333'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='5111' id='93' mode='checkdropdown' name='Good Loans' param='[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]' type-v2='filter' values='database' w='10000' x='3625' y='57889'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='5778' id='94' mode='checkdropdown' name='Good Loans' param='[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]' type-v2='filter' values='database' w='10000' x='3500' y='49111'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3671,7 +4028,10 @@
         <highlight>
           <color-one-way>
             <field>[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan]</field>
+            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:grade:nk]</field>
             <field>[federated.024kxoa153sary17vtceu1myby4v].[none:loan_status:nk]</field>
+            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:purpose:nk]</field>
+            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:verification_status:nk]</field>
           </color-one-way>
         </highlight>
       </viewpoint>
@@ -4185,362 +4545,383 @@
     </thumbnail>
     <thumbnail height='192' name='Loan Summary Dashboard' width='192'>
       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
-      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
+      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
+      6S8y/g8rF6OLvOu2dAAAAABJRU5ErkJggg==
     </thumbnail>
   </thumbnails>
 </workbook>
