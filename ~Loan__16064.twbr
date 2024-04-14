@@ -13,7 +13,6 @@
     <SetMembershipControl />
     <SheetIdentifierTracking />
     <WindowsPersistSimpleIdentifiers />
-    <WorksheetBackgroundTransparency />
   </document-format-change-manifest>
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
@@ -824,13 +823,6 @@
       <simple-id uuid='{87DE9B51-4DFD-4747-92C0-0099323BFC3C}' />
     </worksheet>
     <worksheet name='MTD Total Loan Applications'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run>MTD Total Loan Applications</run>
-          </formatted-text>
-        </title>
-      </layout-options>
       <table>
         <view>
           <datasources>
@@ -850,9 +842,6 @@
           <style-rule element='cell'>
             <format attr='text-format' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921307738113:qk]' value='n#,##0,.00K;-#,##0,.00K' />
           </style-rule>
-          <style-rule element='table'>
-            <format attr='background-color' value='#00000000' />
-          </style-rule>
         </style>
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
@@ -865,9 +854,9 @@
             </encodings>
             <customized-label>
               <formatted-text>
-                <run bold='true' fontcolor='#ffffff'>&lt;</run>
-                <run bold='true' fontcolor='#ffffff'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921307738113:qk]</run>
-                <run bold='true' fontcolor='#ffffff'>&gt;</run>
+                <run>&lt;</run>
+                <run>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921307738113:qk]</run>
+                <run>&gt;</run>
               </formatted-text>
             </customized-label>
             <style>
@@ -1134,9 +1123,6 @@
           <style-rule element='cell'>
             <format attr='text-format' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921311367174:qk]' value='p0.00%' />
           </style-rule>
-          <style-rule element='table'>
-            <format attr='background-color' value='#00000000' />
-          </style-rule>
         </style>
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
@@ -1149,9 +1135,9 @@
             </encodings>
             <customized-label>
               <formatted-text>
-                <run fontcolor='#ffffff' fontname='Tableau Semibold'>&lt;</run>
-                <run fontcolor='#ffffff' fontname='Tableau Semibold'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921311367174:qk]</run>
-                <run fontcolor='#ffffff' fontname='Tableau Semibold'>&gt;</run>
+                <run>&lt;</run>
+                <run>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921311367174:qk]</run>
+                <run>&gt;</run>
               </formatted-text>
             </customized-label>
             <style>
@@ -1345,8 +1331,7 @@
       <layout-options>
         <title>
           <formatted-text>
-            <run bold='true' fontalignment='1' fontcolor='#4e79a7' fontname='Tableau Semibold' fontsize='10'>Total Loan Applications</run>
-            <run>Æ&#10;</run>
+            <run>Total Loan Applications&#10;</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -1369,9 +1354,6 @@
             <format attr='text-align' data-class='subtotal' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921306042368:qk]' value='auto' />
             <format attr='text-format' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921306042368:qk]' value='n#,##0,.0K;-#,##0,.0K' />
           </style-rule>
-          <style-rule element='table'>
-            <format attr='background-color' value='#00000000' />
-          </style-rule>
         </style>
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
@@ -1384,9 +1366,9 @@
             </encodings>
             <customized-label>
               <formatted-text>
-                <run fontcolor='#ffffff' fontname='Tableau Semibold' fontsize='22'>&lt;</run>
-                <run fontcolor='#ffffff' fontname='Tableau Semibold' fontsize='22'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921306042368:qk]</run>
-                <run fontcolor='#ffffff' fontname='Tableau Semibold' fontsize='22'>&gt;</run>
+                <run fontsize='22'>&lt;</run>
+                <run fontsize='22'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921306042368:qk]</run>
+                <run fontsize='22'>&gt;</run>
               </formatted-text>
             </customized-label>
             <style>
@@ -1407,12 +1389,12 @@
     </worksheet>
   </worksheets>
   <dashboards>
-    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Loan Summary Dashboard'>
+    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Overview'>
       <style />
-      <size maxheight='900' maxwidth='1600' minheight='900' minwidth='1600' preset-index='8' sizing-mode='fixed' />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
       <zones>
         <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
-          <zone forceUpdate='true' h='98222' id='3' is-scaled='1' param='C:/Users/Darshil Shah/OneDrive - Northeastern University/Desktop/Loan data Tableau/Tableau Background 1.jpg' type-v2='bitmap' w='99000' x='500' y='889'>
+          <zone h='98000' id='3' is-centered='0' type-v2='bitmap' w='98400' x='800' y='1000'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -1427,108 +1409,13 @@
             <format attr='margin' value='8' />
           </zone-style>
         </zone>
-        <zone forceUpdate='true' h='8444' id='5' type-v2='text' w='36313' x='39313' y='1111'>
-          <formatted-text>
-            <run bold='true' fontcolor='#ffffff' fontsize='22'>BANK LOAN REPORT </run>
-            <run bold='true' fontsize='22'>|</run>
-            <run bold='true' fontcolor='#4e79a7' fontsize='22'> SUMMARY</run>
-          </formatted-text>
-        </zone>
-        <zone h='8444' id='6' name='Total Loan Applications' w='14875' x='16688' y='10667' />
-        <zone h='3111' id='11' name='MTD Total Loan Applications' show-title='false' w='3500' x='18625' y='23444' />
-        <zone h='3333' id='12' type-v2='text' w='3313' x='18688' y='20111'>
-          <formatted-text>
-            <run bold='true' fontalignment='1' fontcolor='#d3b348' fontname='Tableau Semibold'>MTD</run>
-          </formatted-text>
-        </zone>
-        <zone h='2889' id='17' name='MoM Total Applications' show-title='false' w='3563' x='25500' y='23556' />
-        <zone forceUpdate='true' h='3333' id='18' type-v2='text' w='3313' x='25438' y='19889'>
-          <formatted-text>
-            <run bold='true' fontalignment='1' fontcolor='#d3b348' fontname='Tableau Semibold'>MoM</run>
-          </formatted-text>
-        </zone>
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='22' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98222' id='21' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
-                <zone fixed-size='280' forceUpdate='true' h='98222' id='3' is-fixed='true' is-scaled='1' param='C:/Users/Darshil Shah/OneDrive - Northeastern University/Desktop/Loan data Tableau/Tableau Background 1.jpg' type-v2='bitmap' w='99000' x='500' y='889'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone forceUpdate='true' h='8444' id='5' type-v2='text' w='36313' x='39313' y='1111'>
-                  <formatted-text>
-                    <run bold='true' fontcolor='#ffffff' fontsize='22'>BANK LOAN REPORT </run>
-                    <run bold='true' fontsize='22'>|</run>
-                    <run bold='true' fontcolor='#4e79a7' fontsize='22'> SUMMARY</run>
-                  </formatted-text>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='76' h='8444' id='6' is-fixed='true' name='Total Loan Applications' w='14875' x='16688' y='10667'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone forceUpdate='true' h='3333' id='18' type-v2='text' w='3313' x='25438' y='19889'>
-                  <formatted-text>
-                    <run bold='true' fontalignment='1' fontcolor='#d3b348' fontname='Tableau Semibold'>MoM</run>
-                  </formatted-text>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone h='3333' id='12' type-v2='text' w='3313' x='18688' y='20111'>
-                  <formatted-text>
-                    <run bold='true' fontalignment='1' fontcolor='#d3b348' fontname='Tableau Semibold'>MTD</run>
-                  </formatted-text>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='28' h='3111' id='11' is-fixed='true' name='MTD Total Loan Applications' show-title='false' w='3500' x='18625' y='23444'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='26' h='2889' id='17' is-fixed='true' name='MoM Total Applications' show-title='false' w='3563' x='25500' y='23556'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-              </zone>
+            <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='84000' id='1' param='vert' type-v2='layout-flow' w='84000' x='8000' y='8000' />
               <zone-style>
                 <format attr='border-color' value='#000000' />
                 <format attr='border-style' value='none' />
@@ -1539,7 +1426,7 @@
           </zones>
         </devicelayout>
       </devicelayouts>
-      <simple-id uuid='{8A1DD8F7-6F52-44AF-BDC2-215CAC152D63}' />
+      <simple-id uuid='{0376DEE8-B35C-4DC5-B190-24290533A523}' />
     </dashboard>
   </dashboards>
   <windows saved-dpi-scale-factor='1.25' source-height='37'>
@@ -1592,13 +1479,6 @@
       </cards>
       <viewpoint>
         <zoom type='entire-view' />
-        <highlight>
-          <color-one-way>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921308860418:ok]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921309601796:nk]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[yr:issue_date:ok]</field>
-          </color-one-way>
-        </highlight>
       </viewpoint>
       <simple-id uuid='{F414F1ED-D785-4DC7-92AE-A6F006D958D8}' />
     </window>
@@ -1677,13 +1557,6 @@
       </cards>
       <viewpoint>
         <zoom type='entire-view' />
-        <highlight>
-          <color-one-way>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921308860418:ok]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921309601796:nk]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[yr:issue_date:ok]</field>
-          </color-one-way>
-        </highlight>
       </viewpoint>
       <simple-id uuid='{51A37C18-1108-4C11-BAB7-F1D137D01DBC}' />
     </window>
@@ -1736,24 +1609,6 @@
       </cards>
       <viewpoint>
         <zoom type='entire-view' />
-        <selection-collection>
-          <tuple-selection>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields />
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Total Funded Amount (copy)_1643250921315541003:qk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>473070933</value>
-              </tuple>
-            </tuple-reference>
-          </tuple-selection>
-        </selection-collection>
       </viewpoint>
       <simple-id uuid='{207CA8FC-F3B9-4675-AA2B-BBFD40354793}' />
     </window>
@@ -1780,13 +1635,6 @@
       </cards>
       <viewpoint>
         <zoom type='entire-view' />
-        <highlight>
-          <color-one-way>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921308860418:ok]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921309601796:nk]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[yr:issue_date:ok]</field>
-          </color-one-way>
-        </highlight>
       </viewpoint>
       <simple-id uuid='{A9009834-B280-415C-880B-BB1B77ECFB1B}' />
     </window>
@@ -1839,13 +1687,6 @@
       </cards>
       <viewpoint>
         <zoom type='entire-view' />
-        <highlight>
-          <color-one-way>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921308860418:ok]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921309601796:nk]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[yr:issue_date:ok]</field>
-          </color-one-way>
-        </highlight>
       </viewpoint>
       <simple-id uuid='{25C0BF21-EAEA-4E1B-875E-5D5FBBB7EAAD}' />
     </window>
@@ -1924,31 +1765,6 @@
       </cards>
       <viewpoint>
         <zoom type='entire-view' />
-        <selection-collection>
-          <tuple-selection>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields />
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Avg Interest Rate (copy)_1130403513767403520:qk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>0.13327433121143184</value>
-              </tuple>
-            </tuple-reference>
-          </tuple-selection>
-        </selection-collection>
-        <highlight>
-          <color-one-way>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921308860418:ok]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:Calculation_1643250921309601796:nk]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[yr:issue_date:ok]</field>
-          </color-one-way>
-        </highlight>
       </viewpoint>
       <simple-id uuid='{BAA47A94-F5EB-47DC-9311-0443DF53F63C}' />
     </window>
@@ -2004,430 +1820,10 @@
       </viewpoint>
       <simple-id uuid='{C85C4508-18D4-4BF6-8DC0-A48EAD631A71}' />
     </window>
-    <window class='dashboard' maximized='true' name='Loan Summary Dashboard'>
-      <viewpoints>
-        <viewpoint name='MTD Total Loan Applications'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='MoM Total Applications'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='Total Loan Applications'>
-          <zoom type='entire-view' />
-        </viewpoint>
-      </viewpoints>
+    <window class='dashboard' maximized='true' name='Overview'>
+      <viewpoints />
       <active id='3' />
-      <simple-id uuid='{4211AC14-9298-4951-84C9-3F07E94BC28C}' />
+      <simple-id uuid='{0316B968-06AE-4547-ABCF-E4F31BEBC9B5}' />
     </window>
   </windows>
-  <thumbnails>
-    <thumbnail height='192' name='Avg DTI' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACwklEQVR4nO3XuYoUQBRA0ddtj4Hggv7/3yiYCAoaCcZuIM6q9vSUkUaGasPcc6KCSl5y
-      qVebtdYaiNoeewA4pt2vw4vPl/Pt+uaYs8B/9zuAb9c3c3WwDdFiBSJNAKQJgDQBkCYA0gRA
-      mgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJ
-      gDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBI
-      EwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQB
-      kCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBp
-      AiBNAKQJgDQBkCYAbr3r/Y958/zprLXm3etX8/bli1lrzcXpVwFw+601szs5mc1mMw8eP5nv
-      Vxcza829+/dnd+zh4F877Pfz5dOH+fLx/Vydn83l6elcnp/NzeEwm7XWmpl59v58rg7r2LPC
-      X3e938/3y4vZ3b0762bNZrudO7vdbLZbLwC33+7kZHYPH/3xzh+ANAGQJgDSBECaAEgTAGkC
-      IE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDS
-      BECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0A
-      pAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECa
-      AEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmA
-      NAGQJgDSfgKm/lIt6ZTsvQAAAABJRU5ErkJggg==
-    </thumbnail>
-    <thumbnail height='192' name='Avg Interest Rate' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAAChklEQVR4nO3WwWmqYRRF0ZsHEczQOuw+DWTqyBac2cDvQA18qeIhuNeq4Ew2nI+11hqI
-      +vfqAfBKAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJ
-      gDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBI
-      EwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQB
-      kCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBp
-      AiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgB4e4/HY35+fmZm5nw+z+l0
-      mrXW3G43AfD+1lqz2+1mZuZ4PM79fp+11lwuFwHw/p7P51yv17ler/P9/T2Hw2G2bZuvr6/5
-      WGutVw+E/+n5fM62bbPb7eb393dmZvb7/Xx+fgqANheINAGQJgDSBECaAEgTAGkCIE0ApAmA
-      NAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgT
-      AGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQ
-      JgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkC
-      IE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDS
-      /gDR+EAA+G6NIQAAAABJRU5ErkJggg==
-    </thumbnail>
-    <thumbnail height='192' name='Loan Summary Dashboard' width='192'>
-      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
-      LFKOF6VXAAAAAElFTkSuQmCC
-    </thumbnail>
-    <thumbnail height='192' name='MTD Avg DTI' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACnUlEQVR4nO3WMWqUARhF0S8zjhEsjJFUgvtvbCxstLG2sbETUphAIIWGSYxhhvyuQgZy
-      z1nBay68o2VZloGo1aEHwCEJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBp
-      AiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA
-      0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBN
-      AKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRA
-      mgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAuDJe7j7
-      Pe8/fJyZZb5/+zqfPn+Z3czc31wLgKfv+OXJvHt7NjNHc/r6ZO53+1nPzPn5DwHw9P29vZmL
-      nxdzeXU127vdvFo/zvWv7Zy+OZujZVmWQw+E/2m/e5jt7Z/ZHL+Y1eN+ltVmnj9bzXqzEQBt
-      LhBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQB
-      kCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBp
-      AiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA
-      0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBN
-      AKQJgDQBkCYA0gRAmgBIEwBpAiBNAKT9AyJlOjwkK5DVAAAAAElFTkSuQmCC
-    </thumbnail>
-    <thumbnail height='192' name='MTD Avg Interest Rate' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACh0lEQVR4nO3XMWpqYRhF0S/yEGwcRirnX9uJVYZhm+I28Qr/G0UQstcawWl2cT7WWmsg
-      6vDuAfBOAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJ
-      gDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBI
-      EwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQB
-      kCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBp
-      AiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgD4857P51yv15mZ+fr6mvv9
-      Pmut+f7+FgB/31prjsfjzMxcLpf5+fmZtdacz+f59+Zt8Ov2fZ/H4zGPx2Nut9t8fn7Otm2z
-      7/t8rLXWuwfCb9r3fbZtm+PxOK/Xa2ZmTqfTHA4HAdDmA5AmANIEQJoASBMAaQIgTQCkCYA0
-      AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMA
-      aQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAm
-      ANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIg
-      TQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIE
-      QNp/tYBAv3IPj8YAAAAASUVORK5CYII=
-    </thumbnail>
-    <thumbnail height='192' name='MTD Total Amount Received' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACqklEQVR4nO3WMUojYBRG0ecwhQTBHQhZhjtw6xbuQTCtSDComOjvCqYcBe857Wu+5sI7
-      W2utgag/Pz0AfpIASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoA
-      SBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0
-      AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMA
-      aQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAm
-      ANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AfDrHY/Hf97+fuMO+Hb3
-      9/dzd3c3Nzc3c3t7O9vtdg6Hw+z3+7m+vhYAv9t+v5+Li4tZa83b29t8fn7O09PTvLy8zOl0
-      8gLxu11eXs7j4+M8PDzM1dXV7Ha7eX19nbXWHA6HOVtrrZ8eCf/L+/v77Ha72W638/z8PJvN
-      Zj4+PuZ4PM75+bkAaPMCkSYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJ
-      gDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBI
-      EwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQB
-      kCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBp
-      AiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRA2hecg1Qs6sWx4AAAAABJRU5E
-      rkJggg==
-    </thumbnail>
-    <thumbnail height='192' name='MTD Total Loan Applications' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACFUlEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
-      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
-      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
-      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
-      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
-      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR9Y+0F
-      fBUOM1sAAAAASUVORK5CYII=
-    </thumbnail>
-    <thumbnail height='192' name='MTD Total Loan Funded' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACq0lEQVR4nO3XMUpkURBA0XL4BoJoYKBm7sDV9yrcgokdNxgIjV+RP4HpTKrQ95z0JZVc
-      qt7Ztm3bQNSf3x4AfpMASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIE
-      QJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCk
-      CYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoA
-      SBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0
-      AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AXDyPj8/Z9u2f74t
-      PzwL/Kh1XWe3283j4+O8v7/P8Xich4eHeX5+nru7OxuA07au63x8fMzNzc28vr7O19fXXF9f
-      z/n5+RyPRwFw2pZlmaurq3l6eprb29tZ13X2+/0syzKHw2HOtv8dR3ACtm2bl5eXub+/n5nv
-      /8DFxcW8vb3N5eWlAGhzApEmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCk
-      CYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoA
-      SBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0
-      AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMA
-      aQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQNpfjpxIJIW4/rMAAAAASUVO
-      RK5CYII=
-    </thumbnail>
-    <thumbnail height='192' name='MoM Avg DTI' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACfUlEQVR4nO3WsbWhARRG0fsYLxLIJQqwNK8NRQhUQEDA+qeKGcHZu4IvOeven2VZloGo
-      1bcHwDcJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA
-      0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBN
-      AKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRA
-      mgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJ
-      gDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpf749AP6H9/s9l8tlttvtHI/H
-      uV6vc7vdXAAaVqvVnE6neTweMzNzOBxmt9sJgIbn8znn83n2+/3c7/d5vV7zfr/nZ1mW5dvj
-      4F/7fD5zv99ns9nM7+/vrNfrmRkB0OYFIk0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQ
-      JgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkC
-      IE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDS
-      BECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0A
-      pAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmAtL9/GTCxn29j
-      MwAAAABJRU5ErkJggg==
-    </thumbnail>
-    <thumbnail height='192' name='MoM Avg Interest Rate' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACcklEQVR4nO3WMQoiARBFwXYRMfP+J5oLeAYNjBxBBAdms73BYvCqwo5+8qAP+77vA1F/
-      fj0AfkkApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQ
-      JgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkC
-      IE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDS
-      BECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0A
-      pAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAAnf73eWZZnr9frvtiyLAGg4
-      Ho9zuVzm/X7PzMztdpvn8ykAGj6fz2zbNo/HY9Z1nfv9Pq/Xaw77vu+/Hgf/277vs67rnM/n
-      ORwOczqdZts2AdDmBSJNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBp
-      AiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA
-      0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBN
-      AKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRA
-      mgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgLS/VhE6HrG+jg4AAAAASUVORK5C
-      YII=
-    </thumbnail>
-    <thumbnail height='192' name='MoM Total Amount Received' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAAChUlEQVR4nO3WwWlqYRhF0S8XMUWk/z4ydmgTDjIwESHgRf5XxSPgXquCM9lw3tZaayBq
-      ++sB8JcEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMA
-      aQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAm
-      ANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIg
-      TQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIE
-      QJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AfDyHo/HfH5+zszM6XSa8/k8
-      MzPX61UAvL611hyPx5mZ+f7+nufzOWut+fn5EQCvb9/3uVwuc7lc5uPjY76+vuZ2u83v7++8
-      rbXWXw+E/2nf97nf7/P+/j4zM9u2zbZtczgcBECbC0SaAEgTAGkCIE0ApAmANAGQJgDSBECa
-      AEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmA
-      NAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgT
-      AGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQ
-      JgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGn/
-      ACgDQAnlLyB3AAAAAElFTkSuQmCC
-    </thumbnail>
-    <thumbnail height='192' name='MoM Total Applications' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACFUlEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
-      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
-      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
-      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
-      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
-      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR9Y+0F
-      fBUOM1sAAAAASUVORK5CYII=
-    </thumbnail>
-    <thumbnail height='192' name='MoM Total Loan Funded' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACiElEQVR4nO3WMWqqYRRF0avEBFI7/7HY2mQM6axj/JsIfm8UD8G91ghOs+Hs1lprIGr/
-      7AHwTAIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0
-      AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMA
-      aQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAm
-      ANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIg
-      TQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoAeHl/f39zOp1mrTVfX19zPp9n
-      rTXbtgmA17fWmvf399ntdnM8Hmfbtllrzff3twB4fff7fS6Xy1wul/n9/Z2fn5+5Xq/z+fk5
-      u7XWevZA+J/u9/vcbrf5+PiYx+Mx+/1+3t7e5nA4CIA2F4g0AZAmANIEQJoASBMAaQIgTQCk
-      CYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoA
-      SBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0
-      AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMA
-      aQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAm
-      ANL+Aa41RgBl2+w0AAAAAElFTkSuQmCC
-    </thumbnail>
-    <thumbnail height='192' name='Total Amount Received' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAAFAElEQVR4nO3YzU9cVQCG8ffOIBTCFIG0QE0r2KoUS5W0NYJfxNiYGN3UnasuTVz6V5i4
-      cdHEGE00MXFhJdoP0EoTqkwpAdraKk1UKLS1wAhMC4Sv0ntcNMVMYuIGy5D3+a0mc+85uZPc
-      Z865NwohBAGmEut9AcB6Krj/YWByXosr8XpeC/DArQawuBJr4S67IXhhCwRrBABrBABrBABr
-      BABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABr
-      BABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABr
-      BABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABr
-      BABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABr
-      BABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBABrBIANY2Z6UnEcr+mcBWs6
-      G/A/WV5cVH9nh+r3N6u69jElEv/8d8dxrInRq6qorlFRcYkyN65peWF+9XiUSKimdqeiREIz
-      U5OavTWtzRWVSpVXsgIg/02N/akTnx7R7alJDf9yUQOnO3KOX+k7q/bPPtLY1SFJ0mx2StnM
-      uLKZcU3evKGOzz9WCLEup7t08afTmh6/qXPt36r3u+OKQghBktLjc1q4Gx78rwP+Q0/7N9rx
-      ZIMmro2oseVlFRQWKooiSdJsdlrp41+rvKpaVdtrVdvQmDP2Sl+P5mdntO+V1xRCWB0XQtBX
-      H77PCoD8V/fUXvWdOqlbmQlJyrmJu48dVcsbh3K2RPfFcaxfz3WrseWl1XEhBM1kp3Sm7Uvt
-      PvAcASD/Ve2o06tvH1b2r3Gd7zqlS+kuhRDrwplO7dzbpFR5xb+OGzzXrcef2afCTcWr3509
-      0ab0saMqq9yiTSWlPAQj/0VRpNKycj1av0dNrQf1/RefqHZ3o8ZHhhRFkYYundfYyLBKSlMq
-      LC7WtrpdWlle1pX+Hh16972cuZ5/8y1J91aPtiMfEADy32BvWiEELS8tKnN9VAtzcypJpfT6
-      4XdWz+n74aS2PLJD2+p2SZIu9/yohmdblEzeu8VDCOrvbNf2JxpUvrVKmeujSiSTPAQj/63c
-      uaM/fh5Qf2e7dj29X3tfaFVJanPOOTeHf1dJqkwPb9mqEIIGe9OqP9CsZDIp6V4Atycz+u1C
-      v2azUyqvqtGe5hcJABtHf2eHmloPKlmwdhsXAsCGcWdpKecV6FrgGQAbxkNFRWs+J69BYY0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYO1v8VUoCxoEMV0AAAAA
-      SUVORK5CYII=
-    </thumbnail>
-    <thumbnail height='192' name='Total Funded Amount' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAAE1klEQVR4nO3ZzSt0fRzH8c+Zbk0mzaArNCkPRbJAs5A8JA8pO2zsrOz9DSz9AbbKggWF
-      ycKSLBBLG0bCiDwlKUSce6Fr7q69u2v0eb92Z86vX7M473O+ZyYIwzAUYCryt78A8DcRAKwR
-      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
-      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
-      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
-      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
-      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
-      AH6M29tbfXx8fOue/3zrbsD/5OXlRel0Wp2dnaqrq1Mk8t+9+/PzU8fHx6qsrFQsFlMYhrq/
-      v9fNzY1KS0tVXl6uIAj08fGho6MjhWEoSYrH4wrC30dAnspms5qbm1MkElFVVZVisZiGhoZy
-      5zc2NrS0tKTx8XG1tLRoa2srF8Tp6ami0ajGxsaUzWY1Ozur9vZ2SVJZWRlPAOS/7e1tjYyM
-      6OTkRH19fYpGo7lz9/f3Ojg4UG9vb+6zzs5OdXV1SZLCMNTk5KQ+Pz91eXmp9vZ29ff359by
-      DoC8l0qltLq6qqurK0lSEASSvi7u+fl5jY6O/jESBUGgMAz18PCghYUFpVIpRSIRnZ+f6/Hx
-      Ufv7+7q7u1MYhoxAyH+/L+aZmRk1NjYqHo+rt7dX6+vrKikpUVtbm1ZXV1VdXa2WlhZJ0vLy
-      srLZrGpra1VcXKyOjg5dXV3p7Ows9y5QWFjICIT8FwSBSktL1dTUpMHBQc3MzKi5uVmZTEZB
-      EGhvb0+ZTEaJREKxWEz19fUaHh6W9BXP9PS0mpublUwmlUwmJX2NSVNTUwSA/Le5uakwDPXy
-      8qLT01M9PT0pkUhoYmIit2ZlZUXV1dWqr6/X2tqa6urqVFlZqWw2q7e3NxUWFmpxcVENDQ2q
-      qanR3t6efv36xQiE/Pf+/q7d3V2l02m1trZqYGBA8Xj8jzWHh4dKJBKqqKjQ7e2tdnZ2dH19
-      rfLycvX09KioqEjPz8/a2trSxcWFampq1N3dTQD4OdLptAYHB1VQUPBtexIAfozX11dFo9Hc
-      r0DfgQBgjf8BYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
-      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYO1f
-      TvUPuPccpp8AAAAASUVORK5CYII=
-    </thumbnail>
-    <thumbnail height='192' name='Total Loan Applications' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACFUlEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
-      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
-      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
-      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
-      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
-      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR9Y+0F
-      fBUOM1sAAAAASUVORK5CYII=
-    </thumbnail>
-  </thumbnails>
 </workbook>
