@@ -497,14 +497,37 @@
       <column caption='Avg Interest Rate' datatype='real' name='[Calculation_1643250921318232079]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='AVG([int_rate])' />
       </column>
+      <column caption='Bad Loan Amount Received' datatype='integer' name='[Good Loan Amount Received (copy)_1625236523019505674]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM ( IF [Good vs Bad Loan] =&apos;Bad Loan&apos; THEN [total_payment] END)' />
+      </column>
       <column caption='Good Loan Funded Amount' datatype='integer' name='[Good Loan Applications (copy)_1625236523009384452]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='SUM ( IF [Good vs Bad Loan] =&apos;Good Loan&apos; THEN [loan_amount] END)' />
+      </column>
+      <column caption='Bad Loan Applications' datatype='integer' name='[Good Loan Applications (copy)_1625236523017793544]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='COUNT ( IF [Good vs Bad Loan] =&apos;Bad Loan&apos; THEN [id] END)' />
       </column>
       <column caption='Good Loan Amount Received' datatype='integer' name='[Good Loan Funded Amount (copy)_1625236523009933317]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='SUM ( IF [Good vs Bad Loan] =&apos;Good Loan&apos; THEN [total_payment] END)' />
       </column>
+      <column caption='Bad Loan Funded Amount' datatype='integer' name='[Good Loan Funded Amount (copy)_1625236523018772489]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM ( IF [Good vs Bad Loan] =&apos;Bad Loan&apos; THEN [loan_amount] END)' />
+      </column>
       <column caption='Good Loan Applications' datatype='integer' name='[Good Loan% (copy)_1625236523008765955]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='COUNT ( IF [Good vs Bad Loan] =&apos;Good Loan&apos; THEN [id] END)' />
+      </column>
+      <column caption='Bad Loan%' datatype='real' name='[Good Loan% (copy)_1625236523015204871]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='COUNT ( IF [Good vs Bad Loan] =&apos;Bad Loan&apos; THEN&#13;&#10;[id] END)/ [Calculation_1643250921306042368]' />
+      </column>
+      <column caption='Good vs Bad Loan (copy)' datatype='string' name='[Good vs Bad Loan (copy)_1625236523014447110]' role='dimension' type='nominal'>
+        <calculation class='categorical-bin' column='[loan_status]' new-bin='true'>
+          <bin default-name='false' value='&quot;Bad Loan&quot;'>
+            <value>&quot;Charged Off&quot;</value>
+          </bin>
+          <bin default-name='false' value='&quot;Good Loan&quot;'>
+            <value>&quot;Current&quot;</value>
+            <value>&quot;Fully Paid&quot;</value>
+          </bin>
+        </calculation>
       </column>
       <column datatype='string' name='[Good vs Bad Loan]' role='dimension' type='nominal'>
         <calculation class='categorical-bin' column='[loan_status]' new-bin='true'>
@@ -591,11 +614,19 @@
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[Good vs Bad Loan]' type='palette'>
-            <map to='#e15759'>
+            <map to='#bab0ac'>
               <bucket>&quot;Bad Loan&quot;</bucket>
             </map>
             <map to='#f28e2b'>
               <bucket>&quot;Good Loan&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[Good vs Bad Loan (copy)_1625236523014447110]' type='palette'>
+            <map to='#bab0ac'>
+              <bucket>&quot;Good Loan&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Bad Loan&quot;</bucket>
             </map>
           </encoding>
         </style-rule>
@@ -738,6 +769,413 @@
         <cols />
       </table>
       <simple-id uuid='{4AFDE0F4-9C47-4354-89EC-96A39CCFC7AE}' />
+    </worksheet>
+    <worksheet name='Bad Loan Amount Funded'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#4e79a7' fontname='Tableau Semibold' fontsize='10'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='FinancialLoan (bankLoanDB)' name='federated.024kxoa153sary17vtceu1myby4v' />
+          </datasources>
+          <datasource-dependencies datasource='federated.024kxoa153sary17vtceu1myby4v'>
+            <column caption='Bad Loan Funded Amount' datatype='integer' name='[Good Loan Funded Amount (copy)_1625236523018772489]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM ( IF [Good vs Bad Loan] =&apos;Bad Loan&apos; THEN [loan_amount] END)' />
+            </column>
+            <column datatype='string' name='[Good vs Bad Loan]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[loan_status]' new-bin='true'>
+                <bin default-name='false' value='&quot;Bad Loan&quot;'>
+                  <value>&quot;Charged Off&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;Good Loan&quot;'>
+                  <value>&quot;Current&quot;</value>
+                  <value>&quot;Fully Paid&quot;</value>
+                </bin>
+              </calculation>
+            </column>
+            <column caption='Loan Amount' datatype='integer' name='[loan_amount]' role='measure' type='quantitative' />
+            <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[Good Loan Funded Amount (copy)_1625236523018772489]' derivation='User' name='[usr:Good Loan Funded Amount (copy)_1625236523018772489:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Funded Amount (copy)_1625236523018772489:qk]' value='c&quot;$&quot;#,##0,,.00M' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Funded Amount (copy)_1625236523018772489:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='22'><![CDATA[<[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Funded Amount (copy)_1625236523018772489:qk]>]]></run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='left' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{CFB4F8A6-0D8A-4520-B224-FC3584369C51}' />
+    </worksheet>
+    <worksheet name='Bad Loan Amount Received'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#4e79a7' fontname='Tableau Semibold' fontsize='10'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='FinancialLoan (bankLoanDB)' name='federated.024kxoa153sary17vtceu1myby4v' />
+          </datasources>
+          <datasource-dependencies datasource='federated.024kxoa153sary17vtceu1myby4v'>
+            <column caption='Bad Loan Amount Received' datatype='integer' name='[Good Loan Amount Received (copy)_1625236523019505674]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM ( IF [Good vs Bad Loan] =&apos;Bad Loan&apos; THEN [total_payment] END)' />
+            </column>
+            <column datatype='string' name='[Good vs Bad Loan]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[loan_status]' new-bin='true'>
+                <bin default-name='false' value='&quot;Bad Loan&quot;'>
+                  <value>&quot;Charged Off&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;Good Loan&quot;'>
+                  <value>&quot;Current&quot;</value>
+                  <value>&quot;Fully Paid&quot;</value>
+                </bin>
+              </calculation>
+            </column>
+            <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column caption='Total Payment' datatype='integer' name='[total_payment]' role='measure' type='quantitative' />
+            <column-instance column='[Good Loan Amount Received (copy)_1625236523019505674]' derivation='User' name='[usr:Good Loan Amount Received (copy)_1625236523019505674:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Amount Received (copy)_1625236523019505674:qk]' value='c&quot; $&quot;#,##0,,.00M;&quot; $&quot;-#,##0,,.00M' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Amount Received (copy)_1625236523019505674:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='22'>&lt;</run>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='22'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Amount Received (copy)_1625236523019505674:qk]</run>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='22'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='left' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{43848890-D8B1-4F82-9B9F-21B6D09FEFD1}' />
+    </worksheet>
+    <worksheet name='Bad Loan Applications'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#4e79a7' fontname='Tableau Semibold' fontsize='10'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='FinancialLoan (bankLoanDB)' name='federated.024kxoa153sary17vtceu1myby4v' />
+          </datasources>
+          <datasource-dependencies datasource='federated.024kxoa153sary17vtceu1myby4v'>
+            <column caption='Bad Loan Applications' datatype='integer' name='[Good Loan Applications (copy)_1625236523017793544]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='COUNT ( IF [Good vs Bad Loan] =&apos;Bad Loan&apos; THEN [id] END)' />
+            </column>
+            <column datatype='string' name='[Good vs Bad Loan]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[loan_status]' new-bin='true'>
+                <bin default-name='false' value='&quot;Bad Loan&quot;'>
+                  <value>&quot;Charged Off&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;Good Loan&quot;'>
+                  <value>&quot;Current&quot;</value>
+                  <value>&quot;Fully Paid&quot;</value>
+                </bin>
+              </calculation>
+            </column>
+            <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
+            <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[Good Loan Applications (copy)_1625236523017793544]' derivation='User' name='[usr:Good Loan Applications (copy)_1625236523017793544:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='table'>
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Applications (copy)_1625236523017793544:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='22'>&lt;</run>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='22'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Applications (copy)_1625236523017793544:qk]</run>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='22'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='left' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{643927F9-88EE-42B1-AC65-1FFC441B9123}' />
+    </worksheet>
+    <worksheet name='Bad Loan%'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='FinancialLoan (bankLoanDB)' name='federated.024kxoa153sary17vtceu1myby4v' />
+          </datasources>
+          <datasource-dependencies datasource='federated.024kxoa153sary17vtceu1myby4v'>
+            <column caption='Total Applications' datatype='integer' name='[Calculation_1643250921306042368]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='COUNT([id])' />
+            </column>
+            <column caption='Bad Loan%' datatype='real' name='[Good Loan% (copy)_1625236523015204871]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='COUNT ( IF [Good vs Bad Loan] =&apos;Bad Loan&apos; THEN&#13;&#10;[id] END)/ [Calculation_1643250921306042368]' />
+            </column>
+            <column datatype='string' name='[Good vs Bad Loan]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[loan_status]' new-bin='true'>
+                <bin default-name='false' value='&quot;Bad Loan&quot;'>
+                  <value>&quot;Charged Off&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;Good Loan&quot;'>
+                  <value>&quot;Current&quot;</value>
+                  <value>&quot;Fully Paid&quot;</value>
+                </bin>
+              </calculation>
+            </column>
+            <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
+            <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[Good Loan% (copy)_1625236523015204871]' derivation='User' name='[usr:Good Loan% (copy)_1625236523015204871:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan% (copy)_1625236523015204871:qk]' value='p0.00%' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan% (copy)_1625236523015204871:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='20'>&lt;</run>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='20'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan% (copy)_1625236523015204871:qk]</run>
+                <run bold='true' fontcolor='#e15759' fontname='Tableau Semibold' fontsize='20'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{000D6A54-546B-48B9-8C0F-9D6275E95B52}' />
+    </worksheet>
+    <worksheet name='Bad Loans'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#4e79a7' fontname='Tableau Semibold' fontsize='10'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='FinancialLoan (bankLoanDB)' name='federated.024kxoa153sary17vtceu1myby4v' />
+          </datasources>
+          <datasource-dependencies datasource='federated.024kxoa153sary17vtceu1myby4v'>
+            <column caption='AVG(0)' datatype='real' name='[Calculation_1625236523001094145]' role='measure' type='quantitative' user:unnamed='Sheet 16'>
+              <calculation class='tableau' formula='AVG(0)' />
+            </column>
+            <column caption='Total Applications' datatype='integer' name='[Calculation_1643250921306042368]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='COUNT([id])' />
+            </column>
+            <column caption='Good vs Bad Loan (copy)' datatype='string' name='[Good vs Bad Loan (copy)_1625236523014447110]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[loan_status]' new-bin='true'>
+                <bin default-name='false' value='&quot;Bad Loan&quot;'>
+                  <value>&quot;Charged Off&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;Good Loan&quot;'>
+                  <value>&quot;Current&quot;</value>
+                  <value>&quot;Fully Paid&quot;</value>
+                </bin>
+              </calculation>
+            </column>
+            <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
+            <column caption='Loan Status' datatype='string' name='[loan_status]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_1625236523001094145]' derivation='User' name='[usr:Calculation_1625236523001094145:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1643250921306042368]' derivation='User' name='[usr:Calculation_1643250921306042368:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='1' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
+            <format attr='display' class='0' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk]' scope='rows' value='false' />
+            <format attr='display' class='1' field='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk]' scope='rows' value='false' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-width' data-class='total' scope='cols' value='0' />
+            <format attr='border-style' data-class='total' scope='cols' value='none' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='total' scope='cols' value='0' />
+            <format attr='border-style' data-class='total' scope='cols' value='none' />
+            <format attr='border-width' data-class='total' scope='rows' value='0' />
+            <format attr='border-style' data-class='total' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan (copy)_1625236523014447110]' />
+              <wedge-size column='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1643250921306042368:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='2.7292816638946533' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk]' y-index='1'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='2' />
+                <format attr='mark-color' value='#13223a' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk] + [federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk])</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{804C0D5F-D97B-407E-97A8-4A01E0BEC5E5}' />
     </worksheet>
     <worksheet name='Good Loan Amount Received'>
       <layout-options>
@@ -1007,9 +1445,9 @@
             </encodings>
             <customized-label>
               <formatted-text>
-                <run bold='true' fontcolor='#f9a655' fontname='Tableau Semibold' fontsize='10'>&lt;</run>
-                <run bold='true' fontcolor='#f9a655' fontname='Tableau Semibold' fontsize='10'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523005628418:qk]</run>
-                <run bold='true' fontcolor='#f9a655' fontname='Tableau Semibold' fontsize='10'>&gt;</run>
+                <run bold='true' fontcolor='#f9a655' fontname='Tableau Semibold' fontsize='20'>&lt;</run>
+                <run bold='true' fontcolor='#f9a655' fontname='Tableau Semibold' fontsize='20'>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523005628418:qk]</run>
+                <run bold='true' fontcolor='#f9a655' fontname='Tableau Semibold' fontsize='20'>&gt;</run>
               </formatted-text>
             </customized-label>
             <style>
@@ -2035,10 +2473,10 @@
             <run bold='true' fontalignment='1' fontcolor='#d3b348' fontname='Tableau Semibold'>MoM</run>
           </formatted-text>
         </zone>
-        <zone h='33222' id='55' name='Good Loans' w='17688' x='17063' y='30444' />
-        <zone h='7000' id='60' name='Good Loan%' show-title='false' w='6813' x='21813' y='45111' />
-        <zone h='8333' id='63' param='vert' type-v2='layout-flow' w='18750' x='36375' y='33889'>
-          <zone h='8333' id='66' name='Good Loan Applications' w='18750' x='36375' y='33889'>
+        <zone h='36111' id='55' name='Good Loans' w='18750' x='17063' y='29556' />
+        <zone h='8778' id='60' name='Good Loan%' show-title='false' w='8563' x='22000' y='45111' />
+        <zone h='9111' id='63' param='vert' type-v2='layout-flow' w='18750' x='36375' y='33889'>
+          <zone h='9111' id='66' name='Good Loan Applications' w='18750' x='36375' y='33889'>
             <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
             <zone-style>
               <format attr='border-color' value='#000000' />
@@ -2048,8 +2486,8 @@
             </zone-style>
           </zone>
         </zone>
-        <zone h='8333' id='64' param='vert' type-v2='layout-flow' w='18750' x='36375' y='44222'>
-          <zone h='8333' id='67' name='Good Loan Funded Amount' w='18750' x='36375' y='44222'>
+        <zone h='9333' id='64' param='vert' type-v2='layout-flow' w='18750' x='36375' y='44222'>
+          <zone h='9333' id='67' name='Good Loan Funded Amount' w='18750' x='36375' y='44222'>
             <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
             <zone-style>
               <format attr='border-color' value='#000000' />
@@ -2059,8 +2497,43 @@
             </zone-style>
           </zone>
         </zone>
-        <zone h='8333' id='65' param='vert' type-v2='layout-flow' w='18750' x='36375' y='54333'>
-          <zone h='8333' id='68' name='Good Loan Amount Received' w='18750' x='36375' y='54333'>
+        <zone h='8889' id='65' param='vert' type-v2='layout-flow' w='18750' x='36375' y='54333'>
+          <zone h='8889' id='68' name='Good Loan Amount Received' w='18750' x='36375' y='54333'>
+            <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+        </zone>
+        <zone h='36111' id='73' name='Bad Loans' w='18750' x='58375' y='29667' />
+        <zone h='9111' id='74' name='Bad Loan%' show-title='false' w='8188' x='63688' y='44889' />
+        <zone h='8889' id='77' param='vert' type-v2='layout-flow' w='18750' x='77625' y='34667'>
+          <zone h='8889' id='80' name='Bad Loan Applications' w='18750' x='77625' y='34667'>
+            <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+        </zone>
+        <zone h='8889' id='78' param='vert' type-v2='layout-flow' w='18750' x='77500' y='45111'>
+          <zone h='8889' id='81' name='Bad Loan Amount Funded' w='18750' x='77500' y='45111'>
+            <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+        </zone>
+        <zone h='8889' id='79' param='vert' type-v2='layout-flow' w='18750' x='77500' y='55667'>
+          <zone h='8889' id='82' name='Bad Loan Amount Received' w='18750' x='77500' y='55667'>
             <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
             <zone-style>
               <format attr='border-color' value='#000000' />
@@ -2073,10 +2546,10 @@
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='2950' minheight='2950' sizing-mode='vscroll' />
+          <size maxheight='3600' minheight='3600' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='72' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98222' id='71' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
+            <zone h='100000' id='86' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98222' id='85' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
                 <zone fixed-size='280' h='98222' id='3' is-fixed='true' is-scaled='1' param='C:/Users/Darshil Shah/OneDrive - Northeastern University/Desktop/Loan data Tableau/Tableau Background 1.jpg' type-v2='bitmap' w='99000' x='500' y='889'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2355,7 +2828,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='33222' id='55' is-fixed='true' name='Good Loans' w='17688' x='17063' y='30444'>
+                <zone fixed-size='280' h='36111' id='55' is-fixed='true' name='Good Loans' w='18750' x='17063' y='29556'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2364,7 +2837,16 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='67' h='8333' id='66' is-fixed='true' name='Good Loan Applications' w='18750' x='36375' y='33889'>
+                <zone fixed-size='280' h='36111' id='73' is-fixed='true' name='Bad Loans' w='18750' x='58375' y='29667'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='74' h='9111' id='66' is-fixed='true' name='Good Loan Applications' w='18750' x='36375' y='33889'>
                   <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2374,7 +2856,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='67' h='8333' id='67' is-fixed='true' name='Good Loan Funded Amount' w='18750' x='36375' y='44222'>
+                <zone fixed-size='72' h='8889' id='80' is-fixed='true' name='Bad Loan Applications' w='18750' x='77625' y='34667'>
                   <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2384,7 +2866,8 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='63' h='7000' id='60' is-fixed='true' name='Good Loan%' show-title='false' w='6813' x='21813' y='45111'>
+                <zone fixed-size='76' h='9333' id='67' is-fixed='true' name='Good Loan Funded Amount' w='18750' x='36375' y='44222'>
+                  <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2393,7 +2876,45 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='67' h='8333' id='68' is-fixed='true' name='Good Loan Amount Received' w='18750' x='36375' y='54333'>
+                <zone fixed-size='82' h='9111' id='74' is-fixed='true' name='Bad Loan%' show-title='false' w='8188' x='63688' y='44889'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='79' h='8778' id='60' is-fixed='true' name='Good Loan%' show-title='false' w='8563' x='22000' y='45111'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='72' h='8889' id='81' is-fixed='true' name='Bad Loan Amount Funded' w='18750' x='77500' y='45111'>
+                  <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='72' h='8889' id='68' is-fixed='true' name='Good Loan Amount Received' w='18750' x='36375' y='54333'>
+                  <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='72' h='8889' id='82' is-fixed='true' name='Bad Loan Amount Received' w='18750' x='77500' y='55667'>
                   <layout-cache cell-count-h='1' non-cell-size-h='38' type-h='cell' type-w='fixed' />
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2418,183 +2939,6 @@
     </dashboard>
   </dashboards>
   <windows saved-dpi-scale-factor='1.25' source-height='37'>
-    <window class='worksheet' name='Good Loans'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card pane-specification-id='1' param='[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <viewpoint>
-        <zoom type='entire-view' />
-        <highlight>
-          <color-one-way>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan]</field>
-            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:loan_status:nk]</field>
-          </color-one-way>
-        </highlight>
-      </viewpoint>
-      <simple-id uuid='{34B9D2C1-81FA-456D-ACD1-B2F1EEF00494}' />
-    </window>
-    <window class='worksheet' name='Good Loan%'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='title' />
-          </strip>
-        </edge>
-      </cards>
-      <viewpoint>
-        <zoom type='entire-view' />
-        <selection-collection>
-          <tuple-selection>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields />
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523005628418:qk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>0.86175342181667358</value>
-              </tuple>
-            </tuple-reference>
-          </tuple-selection>
-        </selection-collection>
-      </viewpoint>
-      <simple-id uuid='{E88B2708-0160-4504-8EC9-A5CC933253D7}' />
-    </window>
-    <window class='worksheet' name='Good Loan Applications'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='title' />
-          </strip>
-        </edge>
-      </cards>
-      <viewpoint>
-        <zoom type='entire-view' />
-      </viewpoint>
-      <simple-id uuid='{402C7666-36FA-4D4E-B9D0-950BA92D48DA}' />
-    </window>
-    <window class='worksheet' name='Good Loan Funded Amount'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='title' />
-          </strip>
-        </edge>
-      </cards>
-      <viewpoint>
-        <zoom type='entire-view' />
-      </viewpoint>
-      <simple-id uuid='{D13F806C-EB08-47A1-B762-47D02BD4FEF7}' />
-    </window>
-    <window class='worksheet' name='Good Loan Amount Received'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='title' />
-          </strip>
-        </edge>
-      </cards>
-      <viewpoint>
-        <zoom type='entire-view' />
-        <selection-collection>
-          <tuple-selection>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields />
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Funded Amount (copy)_1625236523009933317:qk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>435786170</value>
-              </tuple>
-            </tuple-reference>
-          </tuple-selection>
-        </selection-collection>
-      </viewpoint>
-      <simple-id uuid='{7532528D-A02E-4226-97C9-9E2CF48CDEB3}' />
-    </window>
     <window class='dashboard' maximized='true' name='Loan Summary Dashboard'>
       <viewpoints>
         <viewpoint name='Avg DTI'>
@@ -2602,6 +2946,24 @@
         </viewpoint>
         <viewpoint name='Avg Interest Rate'>
           <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Bad Loan Amount Funded'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Bad Loan Amount Received'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Bad Loan Applications'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Bad Loan%'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Bad Loans'>
+          <zoom type='entire-view' />
+          <highlight field='[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan (copy)_1625236523014447110]'>
+            <bucket-selection />
+          </highlight>
         </viewpoint>
         <viewpoint name='Good Loan Amount Received'>
           <zoom type='entire-view' />
@@ -2747,6 +3109,380 @@
         </highlight>
       </viewpoint>
       <simple-id uuid='{25C0BF21-EAEA-4E1B-875E-5D5FBBB7EAAD}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Bad Loan Amount Funded'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{7D3E18B0-4168-42D4-AB8D-D4BDC7694AC6}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Bad Loan Amount Received'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <selection-collection>
+          <tuple-selection>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields />
+                  <y-fields />
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Amount Received (copy)_1625236523019505674:qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>37284763</value>
+              </tuple>
+            </tuple-reference>
+          </tuple-selection>
+        </selection-collection>
+      </viewpoint>
+      <simple-id uuid='{4B074689-60E9-45D4-905C-B44120707BB9}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Bad Loan Applications'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{1228A4CD-2DC2-4645-8A26-E9873DBA6333}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Bad Loan%'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{ACCFB0AD-1D8A-4C4A-BD2A-34F217F6D050}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Bad Loans'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='1' param='[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan (copy)_1625236523014447110]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <selection-collection>
+          <tuple-selection>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor y-index='1'>
+                  <x-fields y-index='1' />
+                  <y-fields y-index='1'>
+                    <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523001094145:qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>0.0</value>
+              </tuple>
+            </tuple-reference>
+          </tuple-selection>
+        </selection-collection>
+        <highlight>
+          <color-one-way>
+            <field>[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan (copy)_1625236523014447110]</field>
+            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:loan_status:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{40DA7CD8-BF9A-471C-A6BA-4A0EB424EE50}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Good Loan Amount Received'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <selection-collection>
+          <tuple-selection>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields />
+                  <y-fields />
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Funded Amount (copy)_1625236523009933317:qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>435786170</value>
+              </tuple>
+            </tuple-reference>
+          </tuple-selection>
+        </selection-collection>
+      </viewpoint>
+      <simple-id uuid='{7532528D-A02E-4226-97C9-9E2CF48CDEB3}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Good Loan Applications'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{402C7666-36FA-4D4E-B9D0-950BA92D48DA}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Good Loan Funded Amount'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <selection-collection>
+          <tuple-selection>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields />
+                  <y-fields />
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Good Loan Applications (copy)_1625236523009384452:qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>370224850</value>
+              </tuple>
+            </tuple-reference>
+          </tuple-selection>
+        </selection-collection>
+      </viewpoint>
+      <simple-id uuid='{D13F806C-EB08-47A1-B762-47D02BD4FEF7}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Good Loan%'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <selection-collection>
+          <tuple-selection>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields />
+                  <y-fields />
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.024kxoa153sary17vtceu1myby4v].[usr:Calculation_1625236523005628418:qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>0.86175342181667358</value>
+              </tuple>
+            </tuple-reference>
+          </tuple-selection>
+        </selection-collection>
+      </viewpoint>
+      <simple-id uuid='{E88B2708-0160-4504-8EC9-A5CC933253D7}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Good Loans'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='1' param='[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.024kxoa153sary17vtceu1myby4v].[Good vs Bad Loan]</field>
+            <field>[federated.024kxoa153sary17vtceu1myby4v].[none:loan_status:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{34B9D2C1-81FA-456D-ACD1-B2F1EEF00494}' />
     </window>
     <window class='worksheet' hidden='true' name='MTD Avg DTI'>
       <cards>
@@ -3163,496 +3899,328 @@
     </window>
   </windows>
   <thumbnails>
-    <thumbnail height='192' name='Good Loan Amount Received' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAAHTElEQVR4nO3aW2xbdwHH8d+xE8d2GttxmktLmZql7douvY+IbtL2gBAP8AISCDSJV0Di
-      IsQTSENlEqAhJCQeJiEekPaCEBNPCE1CkyZuGy1t6Og1bZqupE1zc2yn8a32+fPQ0CnqHmkm
-      8vt+niyf//E5+ut87b+PHYUQggBTiQ/7BIAPU9d/H/x9YU2tDh8G8PIwgFYnqBkTALywBII1
-      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1
-      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1
-      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1
-      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1
-      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoC1DwwgittK
-      NcubfS7Aput65JkQ1Lc6o2LpX7r1xKcVJ3sebkq2a0o3lhQnUqpnR6QQlGqV1X3/ntrdvWqm
-      +qUoUqLTVKa+IClIkjrJHjXSQ1IUrR+jo961Ow+3PxiTViM9KElKNxYVhY7qmWEpSiiKO8rU
-      5xSFoFp2RCHRLYVY2dodRSGonhlWnEw9tknC1rUhgCi+rwOXf6Fc9bqi0NHA8qTOHf/++gUX
-      NDb9Gw0tvKN6Zlhnn3lZH/33H7TzzpsKUbe62mua2/G8ZkY/r3xlSuMXfq5mT1Ehklb7RnVl
-      /1feP2i7roOXXpUUKwpSqlVSuXBQF5/+up66+isVypcUhaBqbkyXD3xVyU5dxyZ/qETc0oXx
-      b2mleFjZ2pyOn/uBohBr8thLute3e5OnDlvBhgD6VmfUv3JB/zz6PRXKV1UuPKUQPVglZWt3
-      1L9yUXdHnlO+cl2StLT9hOZ2vKB2V692zL2l0ZnXdXP355SpL6iRHtCZj/1Iih5dZbW7t+nM
-      xI8lSen6vE6cPaX54eeUr0ypWDqvyWMvKU506cTZUxpcPK1S8ZBCFKma26P+lSta6T+kfGVK
-      1dw+5StTj3uOsIVtuDpbqbykSGPTv1a2dlvNnuKDISHoiVu/1/zws2qlCg/H17MjytbmNLTw
-      tkbu/kULQycVoqQy9QUlO02Nzryukbm3lGzXpBD0iBD0kdtvqtnTr6Xtx5TsNCVF6iRTaqXy
-      Wu0bVa56fX1wpFLxsPKVK5KCCuXLWh44/LjmBSY2BNDIDOv0xCuqZXcqX7mqj7/zHeUrVzWw
-      PKlt927p1hOfeeQFetduq2/1PSU7DYUokhQ0u+uTunTwa1rpH9fg4lkdP/eyotD+gH1nNXL3
-      T7rx5BcVEt0qFY9oYWhCE6e/q5Nvf1t9qzMbxpcL+5VqldW3elO9a7dVLhz4384G7GxYAqWa
-      KwpRUqXiYS0PHNHozO/Ut3pT+coVZerzevZv31AUYkmx9lx7TTd3f1ZzO16Qoki5ypSOnH9F
-      s7s+JSmham6vFEVKNxb15I3fKhG31d0sKURJNdPb19/9/6hadqdW+p+WJIUooemxFzU99iV1
-      tWs6cfaUqrmxh+cXJ7pUye/Trtk3VMvuVCeZ2cy5wha0IYDetVntv/JLNdKDikJH3ferKhUP
-      aW7H80rEHUnSrtk3VCyd18zoFzR+4WeSIjV7CspVb6ia26NWqqCDl15V9/1VNXv6VShf1vzw
-      SXWSaR1+96dqpfK6OP5NpRtL2r70D13b+2WFRFKSlOzUdeT8T1TPDKl3bVa17IgWByeU7DTW
-      zzBSuXBQe6+9put7XtzMecIWFYXwYHH+57l7anY66l27reH5vypOdOnOzk+o1dO/YYdtq+8p
-      3VjU0uAzSjVLylWn1dWuqdkzoEp+n+JkSsl2TfnKlFKtqmrZEVVze6QooYGlc4oTKa0Ux5Wp
-      zSlXndbi4MT7tzDXb8H2rs2qlcqrXDigOJlSotPS4OJpLQ8cVRRiDSxPanngqOJESoOLZ7S0
-      /Zja3X2bPnn4/7cxgPjBF9Xi8ruKE0mV15cmwFb16A9hkkrcXYEJ/gsEawQAawQAawQAawQA
-      awQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQA
-      awQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQA
-      awQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQA
-      awQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQA
-      awQAawQAawQAawQAawQAawQAawQAawQAawQAawQAawQAa/8BZy3/4tZT+t4AAAAASUVORK5C
-      YII=
-    </thumbnail>
-    <thumbnail height='192' name='Good Loan Applications' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAAFoklEQVR4nO3aT4hVVQDH8d+5984fnXHGRueNmAqiWDmC6EpLsqLC3ESLFgUu2kVIiRFF
-      2KZwE7WuEHdtIghEIUEywURNLaikzDRnTGtGx3Fs/t9372nxmPSlLQocqd/3s3v33Xvuu4/3
-      5Z1z3wsxxijAVHKnXwBwJxEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEA
-      rBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEA
-      rBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEA
-      rBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEA
-      rBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEArBEA
-      rBEArBEArBEArBEArBEArBEArBEArGV/3RDzMcWRfoUkk1rnKSRpbfvENcXRQYWsSWrtUgjh
-      psFidUJxuK+2T0ulbp843KeYjynM6FBoblMsq9Jwn2JZVWipKDTMuI2XCdxaXQDl4DlVD2yX
-      0kapOq7QOk/Z+tcU+06qemJnbXs+qlDpVvbAllokU8deOKHqsR1SSKR8VMniB5Wufk4hBMXx
-      q8r3vSFNXFO6apPSZU8o3/uqlI9JsZRiqWzdViWd9077GwBvdQGEmR1qePQtqbUiDfcr3/uK
-      4uUfFeYsUcOGt6Xm2Yr9J1X9fLs03C+1zb9+cJErW7tZofM+lT2HVBzfqXTF01LTLBWnPlWo
-      dCsOnJ46k7I1mxXaF0iKqu5/U2XPFwSAaVe3BghNbZKk+MtxFSc/UWjtUpizVKGlU3F8SGXv
-      YRXf71bo6pZaOusHWrRGodItTY6o7Dmk0DJXypoVxwZVnt2vdPmT0tSUKASF1i7F375V+cNu
-      xZHLShaunZ4rBm5w0yI4jl1ReeWM4ki/lDVLRV57YrhP8cpZafyqlDZJZbX+uFiq+O5j5bue
-      V2jtVPbYdinJVD22Q+nSxxXaF9afqBhXeeUnxavna1OrYvK2XSTwd0KMMU49iBPDUuNMhZAo
-      FpPK92xRes9GJYvXS42ttfn86IDyPS8pW/eyQtcKxd9/VZg1T2XvERVffqBs3VaF+auv77vr
-      hdq6IIRaNCFV9tDrCnOXKWRNijGqOPqe4uiAsoe33XJxDdwu9YvgM5+p+PmAktmLFEcHpGJS
-      obJcxdcfKg711KYtQxekGR0Kdy1WvHhC1aPvq2HjuyrPH5HSRpXnDkrnDkpJpnTVJjU8taM2
-      eCyU79umdMkjUkOz8j0vKnQslWKp2H9S6cpnxUcf063+GyAfU7x8WnHkktTQrKTSrTBjdu0W
-      6KVTiuNDCs1tCpVuhcYW5QffUVLpVrpsg8qLXymODd4wcqJk0f0KDc21sWOpsvewQvtChba7
-      FQfPKQ71SlEKc5YqaV9wfY0ATJO6AP6JWOQqvvlI6cpn/vytAPiv+dcBAP8H/BUC1ggA1ggA
-      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
-      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
-      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
-      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
-      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1v4AuzFSqDyIj3UAAAAA
-      SUVORK5CYII=
-    </thumbnail>
-    <thumbnail height='192' name='Good Loan Funded Amount' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAAHL0lEQVR4nO3aX4wVVwHH8d+Zmb1/dpcCuy1Q2F3YhReCfSCEBWsLtLZJ02jV9KVSTTRo
-      m+iDjVUb44NWo2g19aXqg4kaU1O1ampqQZISoC0aWorVQloKXaGwwFIWpAv37t29M8eHpdRr
-      +9IHloTf9/N2JzlzJif5zsyZ3BBjjAJMJZf7AoDLiQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBg
-      jQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBg
-      jQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBg
-      jQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBg
-      jQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBg
-      jQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBgjQBg7T0DiPmEinMnp/tagGmX/f+BGKPy
-      E3uVH3pWpcF7FNqqkqSifkbx3EmFtqrCzB6FkKg4O6w4MdYyPpk9oJCVFCdqKs4eVdJ5jUJl
-      lhTCuyYvzp9SrI0q6ZyjUJ19cf44dlyxMaZkZo9CqUOxaKoYHZIUlczunzp/kas4PSTFXMms
-      RQptlUuwPLjShRhjfPtHbE5ofNNXlR/bo1jkSjrnqH3979Qc2qHGtu9KWUWxMaasd6Uqt/9I
-      jW3fU/Pw36bGNsakiXPq2LBFcfwt1Z/8kpRPSvmEKrd+W9nim1omHt/+fTVffWrqnJM1VW/b
-      qLTvgxr/y5eVH/+nlLZJkqqf+JlCtVvnf3Gb1Kyr+vGfKutfo/zUQdUevVOKhdrX/1bp3GXT
-      uGy4UrQ8AfKRvWoeek7td/1G+dEXlPaslJJU6bxlar/7DwodVys/+rzqf7pX8a1hVW75piQp
-      xkL1P39RKnKFznka37ZRSfcSVT/ysCb+/hONP/NDdSy8XiErX5wrdFyt9k8+pjDjWo0/db8m
-      X35cac+gkmuvU/nWbymUOlV77C41X92ktuWflkJQMn+5mkd2KVt0o/Lh3UoXrFA+/OL0rhiu
-      KC17gKS9WwpBje0bVYweUDJjrhRSJVctUKyPqvnaFk3s/pXS3kGFq+ZfHFecfEX5G7tUWvFZ
-      KeYqRvYqW3SDQlpS2r9G8eywYm20ZeLyys8pXDVfxcg+5cf/paRrQCErqzx4j0JllpqHdk69
-      QnX1XxgRpu78R55XVFT+xi5lA2sv+QLhytYawOyF6tiwRUn3YjWP7ta5n9+s/OgLkqTiP0eU
-      j+xTrJ1SyCpTrzeSYpGrseMhZQNrlfWtlmKUikJKph4uIckkRSnmLRMXtVHV//h51Z74gso3
-      3Kfyh+6TQlA+OqTao3eqseMHqn7sEWVL77g4JusdVDx/SsWJvcpHDyjtXXUp1wYGWgIoxkY0
-      daddq8q6ryvpWqxiZJ9i/YyyJbeosuZ+Ve94RM3DO5UP75Ek5cf2KD/xskorPjO10U0yJV39
-      Kk7slS5sqEN7l0J7t4ozh1WcHZZiVOPpBxVrp9Vx9+/VtvSjUggX9iBfUeicq45PPa6sd5XC
-      /26e05LSBSs0sfuXSrsXK5Q6pnGpcCVq2QMUowdU3/yAkpk9Ut5UrI0qXXSjxp99WMWb+5XM
-      6lNx+nWFzrlK5ixVjFETL/5a6YIVSuZdJ0kKIai0coPqm76m4vybyo/9Q+VV90pZVfXNDyi0
-      d6t6+0NqHt6pZFafGs/9WJKUdA0oG1inYvSg0lKHxrd+R5KU9q1W1r/u4jWmfavVePpBlW/+
-      hvTuD0vA+9L6FSgWKk4d0OS+JxTSktqWr1fSOVdF/YzyYy9Nvf5Uu5T1DiqUZyg2J9Tcv0nJ
-      vA8o7V7yzlljVH56SPnxl5TM7lc6f7lCCJo8uFUhKyvtWanJV56cel26IOm4Rsm8ZWoObZfe
-      Oayke0DpnGVqvrZZ2cA6xRjVfH2rsoGbFNoqmtz/V2VLPqzkwmdU4P1oCeBtzX8/IyWZsoXX
-      X45rAqbNewYAuOC/QLBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBG
-      ALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBG
-      ALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBG
-      ALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBG
-      ALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBGALBG
-      ALBGALD2X0fj5nrj6DKEAAAAAElFTkSuQmCC
-    </thumbnail>
-    <thumbnail height='192' name='Good Loan%' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACzUlEQVR4nO3XvWqUURhG0XdiVKJgiKhYKVh4+xZeg4WgnYilgkUIwX8zSZjkszJXoA64
-      16oOnOZpNpyzWpZlGYja2fYA2Kbd34fXxydzurnc5hb4564CON1czvrCa4gWTyDSBECaAEgT
-      AGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQ
-      JgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkC
-      IE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDS
-      BECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0A
-      pAmANAGQJgDSBECaAEgTAGkC4L92bbOeRx+ez/2jl3P9/Os8fv9s9r+8m5mZnYvT2d3yPvir
-      9tZHs3N5Pgef387tnx9nd3NydXfj/LsA+L+tlovZWx/NatnMeu/+rPcezL3jV7O7+Tlf95/O
-      almWZWbmxeGPWV8s294Lf9TqcjMHn9/O2c2DObn1cO5+ejPf7jyZWyeHc3ZzXwC0+QSTJgDS
-      BECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0A
-      pAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECa
-      AEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmA
-      NAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgT
-      AGkCIE0ApAmANAGQJgDSBEDaL8PdVWfo43wJAAAAAElFTkSuQmCC
-    </thumbnail>
-    <thumbnail height='192' name='Good Loans' width='192'>
-      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
-      QmCC
-    </thumbnail>
     <thumbnail height='192' name='Loan Summary Dashboard' width='192'>
       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
-      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
-      SUVORK5CYII=
+      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
+      wwAAAABJRU5ErkJggg==
     </thumbnail>
   </thumbnails>
 </workbook>
